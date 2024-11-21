@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,7 +32,8 @@ public class Chatting {
 
     private String replySender;
 
-    @Column(columnDefinition = "0")
+    //@Column(columnDefinition = "integer default 0")
+    @ColumnDefault("0")
     private int likes;
 
     private boolean pressedLike;
