@@ -44,6 +44,22 @@ public class Official {
     @Column(nullable = false)
     private boolean bookmark;
 
+    protected Official() {}
+
+    public Official(final Long id, final String interestJob, final String imageUrl, final String title, final String companyName,
+                    final String tag, final int views, final int comments, final LocalDate dDay, final boolean bookmark) {
+        this.id = id;
+        this.interestJob = interestJob;
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.companyName = companyName;
+        this.tag = tag;
+        this.views = views;
+        this.comments = comments;
+        this.dDay = dDay;
+        this.bookmark = bookmark;
+    }
+
     // Getters
     public Long getId() { return id; }
     public String getInterestJob() { return interestJob; }
