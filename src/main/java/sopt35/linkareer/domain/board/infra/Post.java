@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Board {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +50,10 @@ public class Board {
     @ColumnDefault("0")
     private int views;
 
-    protected Board() {}
+    protected Post() {}
 
-    public Board(final Long id, final String job, final String community, final String imageUrl, final String title, final String content, final String writer,
-                 final LocalDateTime createdAt, final int favorites, final int comments, final int views) {
+    public Post(final Long id, final String job, final String community, final String imageUrl, final String title, final String content, final String writer,
+                final LocalDateTime createdAt, final int favorites, final int comments, final int views) {
         this.id = id;
         this.job = job;
         this.community = community;
