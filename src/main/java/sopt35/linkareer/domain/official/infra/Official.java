@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Official {
@@ -28,16 +30,19 @@ public class Official {
     private String tag;
 
     @ColumnDefault("0")
-    private Integer views;
+    @Column(nullable = false)
+    private int views;
 
     @ColumnDefault("0")
-    private Integer comments;
+    @Column(nullable = false)
+    private int comments;
 
     @Column(nullable = false)
-    private String dDay;
+    private LocalDate dDay;
 
+    @ColumnDefault("false")
     @Column(nullable = false)
-    private boolean bookmark = false;
+    private boolean bookmark;
 
     // Getters
     public Long getId() { return id; }
@@ -46,9 +51,9 @@ public class Official {
     public String getTitle() { return title; }
     public String getCompanyName() { return companyName; }
     public String getTag() { return tag; }
-    public Integer getViews() { return views; }
-    public Integer getComments() { return comments; }
-    public String getDDay() { return dDay; }
+    public int getViews() { return views; }
+    public int getComments() { return comments; }
+    public LocalDate getDDay() { return dDay; }
     public boolean isBookmark() { return bookmark; }
 
     // 카테고리 Enum
