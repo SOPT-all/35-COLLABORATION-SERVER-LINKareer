@@ -1,6 +1,7 @@
 package sopt35.linkareer.domain.official.infra;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -26,10 +27,10 @@ public class Official {
     @Column(nullable = false)
     private String tag;
 
-    @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer views;
 
-    @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer comments;
 
     @Column(nullable = false)
@@ -49,4 +50,11 @@ public class Official {
     public Integer getComments() { return comments; }
     public String getDDay() { return dDay; }
     public boolean isBookmark() { return bookmark; }
+
+    // 카테고리 Enum
+    public enum Category {
+        RECOMMEND, // 추천 공고
+        POPULAR // 실시간 인기 공고
+    }
+
 }
