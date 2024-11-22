@@ -1,13 +1,12 @@
 package sopt35.linkareer.api.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sopt35.linkareer.api.dto.response.ChattingHistoryApiResponse;
 import sopt35.linkareer.api.facade.ChattingFacade;
-import sopt35.linkareer.global.util.HeaderExtracter;
 
 @RestController
 @RequestMapping("/api/v1/chatting")
@@ -20,8 +19,7 @@ public class ChattingController {
     }
 
     @GetMapping("/history")
-    public ResponseEntity<ChattingHistoryApiResponse> getChattingHistory(HttpServletRequest req) {
-        long memberId = HeaderExtracter.extractMemberId(req);
+    public ResponseEntity<ChattingHistoryApiResponse> getChattingHistory(@RequestHeader Long memberId) {
         return ResponseEntity.ok(
             ChattingHistoryApiResponse.of(chattingFacade.getChattingHistory(memberId))
         );
