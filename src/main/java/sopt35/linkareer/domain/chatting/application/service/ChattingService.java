@@ -1,7 +1,9 @@
 package sopt35.linkareer.domain.chatting.application.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sopt35.linkareer.domain.chatting.application.ChatPartnerGenerator;
@@ -45,12 +47,21 @@ public class ChattingService {
 
     private void addChatList(List<ChatVo> all, List<ChatVo> partnerChat,
         List<ChatVo> myChat) {
+        List<Integer> orders = randomOrders();
         for (int i = 0; i < all.size(); i++) {
-            if (i < 5)
-                addPartnerChat(partnerChat, all.get(i));
+            ChatVo convertedEntity = all.get(orders.get(i));
+            if (i % 2 == 0)
+                addMyChat(myChat, convertedEntity);
             else
-                addMyChat(myChat, all.get(i));
+                addPartnerChat(partnerChat, convertedEntity);
         }
+    }
+
+    private List<Integer> randomOrders() {
+        List<Integer> list = new ArrayList<>(IntStream.rangeClosed(0, 9).boxed()
+            .toList());
+        Collections.shuffle(list);
+        return list;
     }
 
     private void addMyChat(List<ChatVo> myChat, ChatVo convertedEntity) {
