@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 public class OfficialService {
     private final OfficialRepository officialRepository;
 
+    private static final String FUTURE_PREFIX = "D-";
+    private static final String TODAY = "D-Day";
+    private static final String PAST = null;
+
     public OfficialService(OfficialRepository officialRepository) {
         this.officialRepository = officialRepository;
     }
@@ -34,6 +38,7 @@ public class OfficialService {
         }
         // 엔티티 -> 도메인 모델로 변환
         return officialList.stream()
+                .filter(official -> !isPastDDay(official.getDDay()))
                 .map(official -> new OfficialDto(
                         official.getId(),
                         official.getInterestJob(),
@@ -49,17 +54,22 @@ public class OfficialService {
                 .collect(Collectors.toList());
     }
 
+    // 날짜가 지난 공고인지 확인
+    private boolean isPastDDay(LocalDate targetDate) {
+        return LocalDate.now().isAfter(targetDate); // 오늘 이후인지 체크
+    }
+
     // D-Day 계산 메서드
     private String calculateDDay(LocalDate targetDate) {
         LocalDate today = LocalDate.now(); // 오늘 날짜 기준
         long daysBetween = ChronoUnit.DAYS.between(today, targetDate); // 날짜 차이 계산
 
         if (daysBetween > 0) {
-            return "D-" + daysBetween; // 미래 날짜
+            return FUTURE_PREFIX + daysBetween; // 미래 날짜
         } else if (daysBetween == 0) {
-            return "D-Day"; // 오늘
+            return TODAY; // 오늘
         } else {
-            return "D+" + Math.abs(daysBetween); // 과거 날짜
+            return PAST; // 지난 날짜
         }
     }
 
