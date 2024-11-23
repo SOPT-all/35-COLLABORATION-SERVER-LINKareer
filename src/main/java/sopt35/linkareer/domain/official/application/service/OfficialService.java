@@ -6,6 +6,8 @@ import sopt35.linkareer.domain.official.infra.Official;
 import sopt35.linkareer.domain.official.infra.Official.Category;
 import sopt35.linkareer.domain.official.infra.repository.OfficialRepository;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +43,24 @@ public class OfficialService {
                         official.getTag(),
                         official.getViews(),
                         official.getComments(),
-                        official.getDDay(),
+                        calculateDDay(official.getDDay()),
                         official.isBookmark()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    // D-Day 계산 메서드
+    private String calculateDDay(LocalDate targetDate) {
+        LocalDate today = LocalDate.now(); // 오늘 날짜 기준
+        long daysBetween = ChronoUnit.DAYS.between(today, targetDate); // 날짜 차이 계산
+
+        if (daysBetween > 0) {
+            return "D-" + daysBetween; // 미래 날짜
+        } else if (daysBetween == 0) {
+            return "D-Day"; // 오늘
+        } else {
+            return "D+" + Math.abs(daysBetween); // 과거 날짜
+        }
     }
 
 }
