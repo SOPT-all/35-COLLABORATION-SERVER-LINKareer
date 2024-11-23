@@ -1,7 +1,10 @@
 package sopt35.linkareer.domain.official.infra;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDate;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -26,17 +29,36 @@ public class Official {
     @Column(nullable = false)
     private String tag;
 
+    @ColumnDefault("0")
     @Column(nullable = false)
-    private Integer views;
+    private int views;
+
+    @ColumnDefault("0")
+    @Column(nullable = false)
+    private int comments;
 
     @Column(nullable = false)
-    private Integer comments;
+    private LocalDate dDay;
 
+    @ColumnDefault("false")
     @Column(nullable = false)
-    private String dDay;
+    private boolean bookmark;
 
-    @Column(nullable = false)
-    private boolean bookmark = false;
+    protected Official() {}
+
+    public Official(final Long id, final String interestJob, final String imageUrl, final String title, final String companyName,
+                    final String tag, final int views, final int comments, final LocalDate dDay, final boolean bookmark) {
+        this.id = id;
+        this.interestJob = interestJob;
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.companyName = companyName;
+        this.tag = tag;
+        this.views = views;
+        this.comments = comments;
+        this.dDay = dDay;
+        this.bookmark = bookmark;
+    }
 
     // Getters
     public Long getId() { return id; }
@@ -45,8 +67,9 @@ public class Official {
     public String getTitle() { return title; }
     public String getCompanyName() { return companyName; }
     public String getTag() { return tag; }
-    public Integer getViews() { return views; }
-    public Integer getComments() { return comments; }
-    public String getDDay() { return dDay; }
+    public int getViews() { return views; }
+    public int getComments() { return comments; }
+    public LocalDate getDDay() { return dDay; }
     public boolean isBookmark() { return bookmark; }
+
 }
