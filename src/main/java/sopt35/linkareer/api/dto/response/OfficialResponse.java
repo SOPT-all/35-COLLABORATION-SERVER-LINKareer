@@ -1,6 +1,7 @@
 package sopt35.linkareer.api.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import sopt35.linkareer.domain.official.application.dto.response.OfficialDto;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OfficialResponse {
@@ -26,6 +27,21 @@ public class OfficialResponse {
         this.comments = comments;
         this.dDay = dDay;
         this.bookmark = bookmark;
+    }
+
+    public static OfficialResponse from(OfficialDto officialDto) {
+        return new OfficialResponse(
+                officialDto.getId(),
+                officialDto.getInterestJob(),
+                officialDto.getImageUrl(),
+                officialDto.getTitle(),
+                officialDto.getCompanyName(),
+                officialDto.getTag(),
+                officialDto.getViews(),
+                officialDto.getComments(),
+                officialDto.getDDay(),
+                officialDto.isBookmark()
+        );
     }
 
     // Getters

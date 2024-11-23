@@ -2,14 +2,13 @@ package sopt35.linkareer.domain.official.application.service;
 
 import org.springframework.stereotype.Service;
 import sopt35.linkareer.domain.official.application.dto.response.OfficialDto;
+import sopt35.linkareer.domain.official.infra.Category;
 import sopt35.linkareer.domain.official.infra.Official;
-import sopt35.linkareer.domain.official.infra.Official.Category;
 import sopt35.linkareer.domain.official.infra.repository.OfficialRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OfficialService {
@@ -36,22 +35,12 @@ public class OfficialService {
         else {
             officialList = officialRepository.findAllByInterestJob("UX/UI");
         }
+
         // 엔티티 -> 도메인 모델로 변환
         return officialList.stream()
                 .filter(official -> !isPastDDay(official.getDDay()))
-                .map(official -> new OfficialDto(
-                        official.getId(),
-                        official.getInterestJob(),
-                        official.getImageUrl(),
-                        official.getTitle(),
-                        official.getCompanyName(),
-                        official.getTag(),
-                        official.getViews(),
-                        official.getComments(),
-                        calculateDDay(official.getDDay()),
-                        official.isBookmark()
-                ))
-                .collect(Collectors.toList());
+                .map(official -> OfficialDto.from(official, calculateDDay(official.getDDay())))
+                .toList();
     }
 
     // 날짜가 지난 공고인지 확인

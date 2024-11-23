@@ -1,5 +1,7 @@
 package sopt35.linkareer.domain.official.application.dto.response;
 
+import sopt35.linkareer.domain.official.infra.Official;
+
 public class OfficialDto {
     private Long id;
     private final String interestJob;
@@ -23,6 +25,21 @@ public class OfficialDto {
         this.comments = comments;
         this.dDay = dDay;
         this.bookmark = bookmark;
+    }
+
+    public static OfficialDto from(Official official, String dDay) {
+        return new OfficialDto(
+                official.getId(),
+                official.getInterestJob(),
+                official.getImageUrl(),
+                official.getTitle(),
+                official.getCompanyName(),
+                official.getTag(),
+                official.getViews(),
+                official.getComments(),
+                dDay,
+                official.isBookmark()
+        );
     }
 
     // Getters
