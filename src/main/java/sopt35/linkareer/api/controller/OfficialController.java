@@ -7,7 +7,7 @@ import sopt35.linkareer.api.dto.response.ErrorCode;
 import sopt35.linkareer.api.dto.response.OfficialListResponse;
 import sopt35.linkareer.domain.official.application.dto.response.OfficialDto;
 import sopt35.linkareer.domain.official.application.service.OfficialService;
-import sopt35.linkareer.domain.official.infra.Official.Category;
+import sopt35.linkareer.domain.official.infra.Category;
 import sopt35.linkareer.global.exception.LinkareerException;
 
 import java.util.List;
