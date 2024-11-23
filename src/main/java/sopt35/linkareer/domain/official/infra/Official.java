@@ -72,10 +72,4 @@ public class Official {
     public LocalDate getDDay() { return dDay; }
     public boolean isBookmark() { return bookmark; }
 
-    // 카테고리 Enum
-    public enum Category {
-        RECOMMEND, // 추천 공고
-        POPULAR // 실시간 인기 공고
-    }
-
 }
