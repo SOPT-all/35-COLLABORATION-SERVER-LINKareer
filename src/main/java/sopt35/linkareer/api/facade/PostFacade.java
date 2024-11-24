@@ -1,10 +1,9 @@
 package sopt35.linkareer.api.facade;
 
-import java.util.List;
 import sopt35.linkareer.annotation.Facade;
 import sopt35.linkareer.api.dto.response.PostsApiResponse;
 import sopt35.linkareer.domain.post.application.service.PostService;
-import sopt35.linkareer.domain.post.application.vo.PostVo;
+import sopt35.linkareer.domain.post.infra.category.PostCategory;
 
 @Facade
 public class PostFacade {
@@ -15,9 +14,9 @@ public class PostFacade {
         this.postService = postService;
     }
 
-    public PostsApiResponse getPosts() {
+    public PostsApiResponse getPosts(PostCategory category) {
         return PostsApiResponse.toPostsApiResponse(
-                postService.getPosts()
+                postService.getPosts(category)
         );
     }
 }
