@@ -25,9 +25,7 @@ public class PostController {
     public ResponseEntity<PostsApiResponse> getPosts(
             final @RequestHeader Long memberId
     ) {
-        List<PostVo> posts = postFacade.getPosts();
-        PostsServiceResponse postsServiceResponse = PostsServiceResponse.toPostsServiceResponse(posts);
-        PostsApiResponse postsApiResponse = PostsApiResponse.toPostsApiResponse(postsServiceResponse);
+        PostsApiResponse postsApiResponse = postFacade.getPosts();
 
         return ResponseEntity.ok(postsApiResponse);
     }
