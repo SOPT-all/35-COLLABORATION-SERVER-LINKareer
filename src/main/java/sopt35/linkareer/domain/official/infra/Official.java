@@ -72,4 +72,11 @@ public class Official {
     public LocalDate getDDay() { return dDay; }
     public boolean isBookmark() { return bookmark; }
 
+    public void registerBookMark() {
+        this.bookmark = true;
+    }
+
+    public void cancelBookMark() {
+        this.bookmark = false;
+    }
 }
