@@ -1,6 +1,8 @@
 package sopt35.linkareer.domain.official.application.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import sopt35.linkareer.api.dto.response.ErrorCode;
 import sopt35.linkareer.domain.official.application.dto.response.OfficialDto;
 import sopt35.linkareer.domain.official.infra.Category;
 import sopt35.linkareer.domain.official.infra.Official;
@@ -9,6 +11,7 @@ import sopt35.linkareer.domain.official.infra.repository.OfficialRepository;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import sopt35.linkareer.global.exception.LinkareerException;
 
 @Service
 public class OfficialService {
@@ -62,4 +65,17 @@ public class OfficialService {
         }
     }
 
+    @Transactional
+    public void addBookMark(final long officialId) {
+        officialRepository.findById(officialId).ifPresentOrElse(Official::registerBookMark, () -> {
+            throw new LinkareerException(ErrorCode.OFFICIAL_NOT_FOUND);
+        });
+    }
+
+    @Transactional
+    public void deleteBookMark(final long officialId) {
+        officialRepository.findById(officialId).ifPresentOrElse(Official::cancelBookMark, () -> {
+            throw new LinkareerException(ErrorCode.OFFICIAL_NOT_FOUND);
+        });
+    }
 }
