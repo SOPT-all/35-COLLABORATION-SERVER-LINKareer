@@ -1,11 +1,12 @@
 package sopt35.linkareer.domain.post.application.dto.response;
 
-import sopt35.linkareer.domain.post.application.vo.PostsVo;
+import java.util.List;
+import sopt35.linkareer.domain.post.application.vo.PostVo;
 
 public record PostsServiceResponse(
-        PostsVo posts
+        List<PostVo> posts
 ) {
-    public static PostsServiceResponse toPostsServiceResponse(final PostsVo posts) {
+    public static PostsServiceResponse toPostsServiceResponse(final List<PostVo> posts) {
         return new PostsServiceResponse(posts);
     }
 }
