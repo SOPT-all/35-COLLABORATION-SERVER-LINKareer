@@ -1,4 +1,4 @@
-package sopt35.linkareer.domain.board.infra;
+package sopt35.linkareer.domain.post.infra;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
