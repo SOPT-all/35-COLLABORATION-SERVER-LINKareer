@@ -1,6 +1,5 @@
-package sopt35.linkareer.domain.post.infra;
+package sopt35.linkareer.domain.post.infra.category;
 
-import java.util.Arrays;
 import sopt35.linkareer.api.dto.response.ErrorCode;
 import sopt35.linkareer.global.exception.LinkareerException;
 

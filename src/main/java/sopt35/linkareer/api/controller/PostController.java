@@ -1,6 +1,5 @@
 package sopt35.linkareer.api.controller;
 
-import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sopt35.linkareer.api.dto.response.PostsApiResponse;
 import sopt35.linkareer.api.facade.PostFacade;
+import sopt35.linkareer.domain.post.infra.category.PostCategory;
 import sopt35.linkareer.domain.post.validator.PostCategoryValidator;
 
 @RestController
@@ -29,7 +29,7 @@ public class PostController {
             final @RequestParam("category") String category
     ) {
         postCategoryValidator.validate(category);
-        PostsApiResponse postsApiResponse = postFacade.getPosts();
+        PostsApiResponse postsApiResponse = postFacade.getPosts(PostCategory.from(category));
 
         return ResponseEntity.ok(postsApiResponse);
     }
