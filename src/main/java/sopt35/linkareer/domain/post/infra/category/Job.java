@@ -17,11 +17,12 @@ public enum Job {
     }
 
     public static Job findJobByName(final String name) {
-        try {
-            return Job.valueOf(name.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new LinkareerException(ErrorCode.CATEGORY_NOT_FOUND);
-        }
+        return Arrays.stream(Job.values())
+                .filter(job -> job.getName().equals(name))
+                .findFirst()
+                .orElseThrow(
+                        () -> new LinkareerException(ErrorCode.CATEGORY_NOT_FOUND)
+                );
     }
 
     public String getName() {

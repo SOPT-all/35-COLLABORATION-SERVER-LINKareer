@@ -6,4 +6,5 @@ import sopt35.linkareer.domain.post.infra.Post;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findPostsByJobIn(final List<String> jobNames);
+    List<Post> findPostsByJob(final String jobName);
 }
