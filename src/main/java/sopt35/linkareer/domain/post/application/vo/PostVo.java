@@ -10,12 +10,12 @@ public record PostVo(
         String title,
         String content,
         String writer,
-        long beforeHour,
+        String beforeTime,
         int favorites,
         int comments,
         int views
 ) {
-    public static PostVo of(final Post post, final long beforeHour) {
+    public static PostVo of(final Post post, final String beforeTime) {
         return new PostVo(
                 post.getId(),
                 post.getJob(),
@@ -24,7 +24,7 @@ public record PostVo(
                 post.getTitle(),
                 post.getContent(),
                 post.getWriter(),
-                beforeHour,
+                beforeTime,
                 post.getFavorites(),
                 post.getComments(),
                 post.getViews()

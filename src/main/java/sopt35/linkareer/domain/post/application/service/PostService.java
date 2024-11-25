@@ -42,7 +42,7 @@ public class PostService {
         List<PostVo> postVos = findPosts.stream()
                 .map(post -> PostVo.of(
                         post,
-                        TimeCalculator.BETWEEN(post.getCreatedAt(), LocalDateTime.now())
+                        TimeCalculator.calculateTimeInterval(post.getCreatedAt(), LocalDateTime.now())
                 )).toList();
 
         return PostsServiceResponse.toPostsServiceResponse(postVos);
