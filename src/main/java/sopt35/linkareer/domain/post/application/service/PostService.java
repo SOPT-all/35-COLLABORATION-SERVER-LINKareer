@@ -18,7 +18,7 @@ import sopt35.linkareer.global.util.TimeCalculator;
 @Service
 public class PostService {
 
-    private static final String CUSTOM_USER_JOB_NAME = "UI/UX";
+    private static final String CUSTOM_USER_JOB_NAME = "UX/UI";
 
     private final PostRepository postRepository;
 
