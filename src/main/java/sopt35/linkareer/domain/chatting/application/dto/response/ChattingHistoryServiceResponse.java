@@ -1,7 +1,6 @@
 package sopt35.linkareer.domain.chatting.application.dto.response;
 
-import java.util.List;
-import sopt35.linkareer.domain.chatting.application.vo.ChatVo;
+import sopt35.linkareer.domain.chatting.application.vo.ChattingHistoryVo;
 import sopt35.linkareer.domain.chatting.application.vo.ChatPartnerVo;
 import sopt35.linkareer.domain.chatting.application.vo.ChatRoomVo;
 import sopt35.linkareer.domain.chatting.application.vo.MyChatInfo;
@@ -13,12 +12,12 @@ public record ChattingHistoryServiceResponse(String chatRoomName, int chatPartic
 ) {
 
     public static ChattingHistoryServiceResponse of(ChatRoomVo chatRoomVo,
-        PartnerVo partnerVo, List<ChatVo> partnerChat, List<ChatVo> myChat) {
+        PartnerVo partnerVo, ChattingHistoryVo chattingHistoryVo) {
         return new ChattingHistoryServiceResponse(chatRoomVo.chatRoomName(),
             chatRoomVo.chatParticipantsCount(),
             ChatPartnerVo.of(partnerVo.partnerName(), partnerVo.isBlueChecked(),
-                partnerVo.tag(), partnerChat),
-            MyChatInfo.of(myChat));
+                partnerVo.tag(), chattingHistoryVo.partnerChats()),
+            MyChatInfo.of(chattingHistoryVo.myChats()));
     }
 
 }
