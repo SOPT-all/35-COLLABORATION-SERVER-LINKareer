@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import sopt35.linkareer.domain.post.infra.Post;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findPostsByJobIn(final List<String> jobNames);
-    List<Post> findPostsByJob(final String jobName);
+    List<Post> findTop3ByJobInOrderByCreatedAtDesc(final List<String> jobNames);
+    List<Post> findTop3ByJobOrderByCreatedAtDesc(final String jobName);
 }
