@@ -8,7 +8,6 @@ import sopt35.linkareer.api.dto.response.ErrorCode;
 import sopt35.linkareer.domain.post.application.dto.response.PostsServiceResponse;
 import sopt35.linkareer.domain.post.application.vo.PostVo;
 import sopt35.linkareer.domain.post.infra.Post;
-import sopt35.linkareer.domain.post.infra.category.Job;
 import sopt35.linkareer.domain.post.infra.category.Jobs;
 import sopt35.linkareer.domain.post.infra.category.PostCategory;
 import sopt35.linkareer.domain.post.infra.repository.PostRepository;
@@ -28,9 +27,9 @@ public class PostService {
 
     private List<Post> findPostsByCategory(final PostCategory postCategory) {
         if (postCategory == PostCategory.INTEREST) {
-            return postRepository.findPostsByJobIn(Jobs.getJobNamesRelateWith(CUSTOM_USER_JOB_NAME));
+            return postRepository.findTop3ByJobInOrderByCreatedAtDesc(Jobs.getJobNamesRelateWith(CUSTOM_USER_JOB_NAME));
         } else if (postCategory == PostCategory.JOB) {
-            return postRepository.findPostsByJob(CUSTOM_USER_JOB_NAME);
+            return postRepository.findTop3ByJobOrderByCreatedAtDesc(CUSTOM_USER_JOB_NAME);
         }
 
         throw new LinkareerException(ErrorCode.INTERNAL_SERVER_ERROR);
